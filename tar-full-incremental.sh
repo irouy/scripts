@@ -6,10 +6,10 @@
 
 #Change the 5 variables below to fit your computer/backup
 
-COMPUTER=deep                           	# name of this computer
-DIRECTORIES="/home"                     	# directoris to backup
-BACKUPDIR=/backups                      	# where to store the backups
-TIMEDIR=/backups/last-full              	# where to store time of full backup
+COMPUTER=                           	# name of this computer
+DIRECTORIES=                   	# directoris to backup
+BACKUPDIR=                      	# where to store the backups
+TIMEDIR=              	# where to store time of full backup
 TAR=/bin/tar                            		# name and locaction of tar
 
 #You should not have to change anything below here
