@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# 2015-10-12 yourimatthys@gmail.com
+# 2015-10-12 yourimatthys [at] gmail [dot] com
 
 WORKVG="VGSYSTEM"
 SOURCELV="LVHOME"
