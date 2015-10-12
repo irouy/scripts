@@ -6,9 +6,9 @@ WORKVG="VGSYSTEM"
 SOURCELV="LVHOME"
 SNAPLV="LVHOME-SNAP1"
 SNAPSIZE="5G"
-MOUNTOPTS="-onouuid,ro"
-REMOTEHOST="y_matthys@vmos01"
-REMOTEDIR="/mnt/BACKUP/HOME/CORSICA01/"
+MOUNTOPTS="-onouuid,ro" # << if FS == XFS
+REMOTEHOST=""
+REMOTEDIR=""
 
 # Make sure only root can run our script
 	if [ "$(id -u)" != "0" ]; then
