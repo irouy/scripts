@@ -20,7 +20,7 @@ lvcreate -L $SNAPSIZE -s /dev/$WORKVG/$SOURCELV -n $SNAPLV
 mkdir /mnt/$SNAPLV
 mount $MOUNTOPTS /dev/$WORKVG/$SNAPLV /mnt/$SNAPLV
 
-rsync -av --progress /mnt/$SNAPLV/ $REMOTEHOST:$REMOTEDIR
+rsync -av --delete-after /mnt/$SNAPLV/ $REMOTEHOST:$REMOTEDIR/
 
 umount /mnt/$SNAPLV
 rmdir /mnt/$SNAPLV
