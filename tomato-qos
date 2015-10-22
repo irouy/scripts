@@ -1,0 +1,27 @@
+nvram set qos_irates="85-85,85-85,40-40,25-25,30-40,10-10,10-10,30-30,10-10,10-10"
+nvram set qos_orates="10-10,20-85,20-80,10-60,20-90,10-75,10-80,10-80,10-20,10-10"
+nvram set qos_orules="0<<17<a<<0<<<0x2e<0<DSCP EF>0<<17<a<<0<rtp<<<0<RTP>0<<-1<d<3478,3479,5060<0<<<<0<SIP, Stun Services>0<<6<d<1718:1720,4060<0<<<<0<HFA>1<192.168.0.11<-1<a<<0<<<<0<PBX>2<192.168.0.11<-1<a<<0<<<<0<PBX>0<<17<x<5004:5020,29100:29259<0<<<<0<Voice payload op port>0<<-1<a<<0<bittorrent<<<8<P2P>0<<6<x<8069<0<<<<4<OpenERP>0<<-1<a<<0<httpvideo<<<4<HTTP Video, (Youtube)>0<<-1<a<<0<shoutcast<<<4<Shoutcast>0<<-1<x<1194<0<<<<1<VPN Tunnel>0<<6<x<445<0<<<<7<SAMBA>0<<-1<x<88,135,137:139,389<0<<<<2<DOMAIN>0<<-1<d<53<0<<0:10<<2<DNS>0<<-1<d<37<0<<0:10<<2<Time>0<<17<d<123<0<<0:10<<2<NTP>0<<-1<d<3455<0<<0:10<<2<RSVP>0<<-1<d<9<0<<0:50<<4<SCTP, Discard>0<<-1<x<135,2101,2103,2105<0<<<<4<RPC (Microsoft)>0<<6<d<23,992<0<<<<3<Telnet>0<<6<x<22,2222<0<<<<3<SSH>0<<6<s<80,8080,2222<0<<<<3<Remote Access>0<<-1<x<3389<0<<<<3<Remote Assistance>0<<6<d<80,443<0<<0:512<<4<HTTP, HTTPS>0<<6<d<8080<0<<0:512<<4<HTTP Proxy/Alternate>0<<6<d<25,587,465,2525<0<<<<5<SMTP, Submission Mail>0<<6<d<110,995<0<<<<5<POP3 Mail>0<<6<d<143,220,585,993<0<<<<5<IMAP Mail>0<<6<d<20,21,989,990<0<<<<7<FTP>0<<6<d<80,443,8080<0<<512:<<7<HTTP,SSL File Transfers>0<<-1<a<<0<flash<<<4<Flash Video, (Youtube)>0<<-1<a<<0<irc<<<6<IRC"
+
+Server :
+
+cp /etc/qos /tmp/qos-tun21
+sed -i 's/vlan2/tun21/g' /tmp/qos-tun21
+sed -i 's/imq0/imq1/g' /tmp/qos-tun21
+chmod +x /tmp/qos-tun21
+iptables -t mangle -A FORWARD -o tun21 -j QOSO
+iptables -t mangle -A OUTPUT -o tun21 -j QOSO
+iptables -t mangle -A PREROUTING -i tun21 -j CONNMARK --restore-mark --mask 0xff
+iptables -t mangle -A PREROUTING -i tun21 -j IMQ --todev 1
+ifconfig imq1 up
+
+Cliënt :
+
+cp /etc/qos /tmp/qos-tun11
+sed -i 's/vlan2/tun11/g' /tmp/qos-tun11
+sed -i 's/imq0/imq1/g' /tmp/qos-tun11
+chmod +x /tmp/qos-tun11
+iptables -t mangle -A FORWARD -o tun11 -j QOSO
+iptables -t mangle -A OUTPUT -o tun11 -j QOSO
+iptables -t mangle -A PREROUTING -i tun11 -j CONNMARK --restore-mark --mask 0xff
+iptables -t mangle -A PREROUTING -i tun11 -j IMQ --todev 1
+ifconfig imq1 up
