@@ -1,0 +1,9 @@
+[Unit]
+Description=netcat collector voor oak
+
+[Service]
+Restart=Always
+ExecStart=/bin/bash -c "nc -k -l 5001 >> /var/log/oak/work/col.cdr"
+
+[Install]
+WantedBy=multi-user.target
