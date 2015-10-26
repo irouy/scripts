@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if pgrep --exact "nc" > /dev/null 
+        then
+                exit
+        else
+                systemctl restart oak.collector.netcat.service
+fi
