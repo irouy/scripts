@@ -1,30 +1,39 @@
-#!/opt/bin/bash
+#!/bin/bash 
+# 'http://linuxconfig.org/bash-scripts-to-scan-and-monitor-network'
+ 
+LOG=/tmp/mylog.log 
+SECONDS=3600 
 
-LOG=/opt/script/pinglog.log
-SECONDS=2
+EMAIL=my@email.address 
+ 
+for i in $@; do 
+	echo "$i-UP!" > $LOG.$i 
 
-EMAIL=someone@somedomain.local
+done 
+ 
+while true; do 
+	for i in $@; do 
 
-for i in $@; do
-        echo "$i-UP!" > $LOG.$i
+ping -c 1 $i > /dev/null 
+if [ $? -ne 0 ]; then 
+	STATUS=$(cat $LOG.$i) 
+ 		if [ $STATUS != "$i-DOWN!" ]; then 
+ 			echo "`date`: ping failed, $i host is down!" | 
+			mail -s "$i host is down!" $EMAIL 
 
-done
+ 		fi 
+	echo "$i-DOWN!" > $LOG.$i 
 
-while true; do
-        for i in $@; do
+else 
+	STATUS=$(cat $LOG.$i)
+ 		if [ $STATUS != "$i-UP!" ]; then 
+ 			echo "`date`: ping OK, $i host is up!" | 
+			mail -s "$i host is up!" $EMAIL
 
-ping -c 1 $i > /dev/null
-if [ $? -ne 0 ]; then
-        STATUS=$(cat $LOG.$i)
-                if [ $STATUS != "$i-DOWN!" ]; then
-                        echo "`date`: ping failed, $i host is down!" |
-                        mail -s "$i host is down!" $EMAIL
+ 		fi 
+	echo "$i-UP!" > $LOG.$i 
+fi 
+done 
 
-                fi
-        echo "$i-DOWN!" > $LOG.$i
-
-fi
-done
-
-sleep $SECONDS
+sleep $SECONDS 
 done
