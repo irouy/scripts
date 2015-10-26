@@ -1,0 +1,15 @@
+#!/bin/bash
+
+NOW=$(date +"%Y_%m_%d_%H_%M_%S")
+WORKDIR=/var/log/oak/work
+BACKDIR=/var/log/oak/bak
+REPORTADDR="10.10.1.229"
+
+if ping -c 1 $REPORTADDR &> /dev/null
+        then 
+                cp $WORKDIR/col.cdr $BACKDIR/$NOW-col.cdr
+                cat $WORKDIR/col.cdr |nc $REPORTADDR 5001 
+                echo > $WORKDIR/col.cdr
+        else
+                exit
+fi
