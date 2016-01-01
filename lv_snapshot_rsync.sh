@@ -1,15 +1,13 @@
-#!/bin/bash
-#
-# 2015-10-12 miruoy
-# Now using rsyncd for proper remote paths
+#!/bin/sh +x
 
-WORKVG="VG_VMS01_DATA"
-SOURCELV="LV_LIBVIRT"
-SNAPLV="LV_LIBVIRT-SNAP1"
+WORKVG="VG_VMS01_SYS"
+SOURCELV="LV_ROOT"
+SNAPLV="LVROOT-SNAP1"
 SNAPSIZE="10G"
-MOUNTOPTS="-onouuid,ro" # << if FS == XFS -onouuid,ro
+MOUNTOPTS="" # << if FS == XFS -onouuid,ro
 REMOTEHOST="NAS"
-REMOTEDIR="BACKUP_VMS01/libvirt"
+REMOTEDIR="BACKUP_VMS01/rootfs"
+LOGFILE="/var/log/$WORKVG-$SOURCELV-backup.log"
 
 # Make sure only root can run our script
         if [ "$(id -u)" != "0" ]; then
@@ -17,25 +15,55 @@ REMOTEDIR="BACKUP_VMS01/libvirt"
                 exit 1
         fi
 
+# write first parameter $1 to logfile
+function write_to_log 
+{
+  # get current date and time
+  bkp_date=$(date +%Y-%m-%d@%H:%M:%S)
+  echo -e "$bkp_date : $1" >> $LOGFILE
+}
+
+# Append log entry
+write_to_log "====== Starting Backup ======"
+
 # Check if SNAPLV exists
         if [[ $(lvs | grep $SNAPLV) ]]; then
                 echo "$SNAPLV already exists! Aborting" 1>&2
                 exit 1
         else
-                lvcreate -L $SNAPSIZE -s /dev/$WORKVG/$SOURCELV -n $SNAPLV
+                lvcreate -L $SNAPSIZE -s /dev/$WORKVG/$SOURCELV -n $SNAPLV >> $LOGFILE
         fi
 
 # Make sure $DIRECTORY exists, if not then create directory!
         if [ -d /mnt/$SNAPLV ]
         then
-                echo "Directory $SNAPLV exists."
+                echo "Directory $SNAPLV exists." >> $LOGFILE
         else
                 mkdir /mnt/$SNAPLV
         fi
 
+# check whether mount point is in use
+	if [ ! -z "$(mount -l | grep $SNAPLV)" ]; then 
+  		write_to_log "[X] Error: Mount point already in use"
+  		write_to_log "====== Backup failed ======"
+  		exit 1
+	fi
 
-mount $MOUNTOPTS /dev/$WORKVG/$SNAPLV /mnt/$SNAPLV
-rsync -av --delete-after /mnt/$SNAPLV/ $REMOTEHOST::$REMOTEDIR
+# Mount SNAPVOL
+/usr/bin/mount --verbose --read-only $MOUNTOPTS /dev/$WORKVG/$SNAPLV /mnt/$SNAPLV >> $LOGFILE 
+	if [ $? -ne 0 ]; then
+		rmdir /mnt/$SNAPLV
+		lvremove -f /dev/$WORKVG/$SNAPLV >> $LOGFILE
+  		write_to_log "[X] Error: Could not mount /dev/$WORKVG/$SNAPLV to /mnt/$SNAPLV"
+  		write_to_log "====== Backup failed ======"
+  		exit 1
+	fi
+write_to_log "Starting rsync of $WORKVG/$SNAPVOL to $REMOTEHOST::$REMOTEDIR"
+rsync --archive --delete-before /mnt/$SNAPLV/ $REMOTEHOST::$REMOTEDIR 
+write_to_log "Unmounting /mnt/$SNAPLV"
 umount /mnt/$SNAPLV
+write_to_log "Removing temp dir /mnt/$SNAPLV"
 rmdir /mnt/$SNAPLV
-lvremove -f /dev/$WORKVG/$SNAPLV
+lvremove -f /dev/$WORKVG/$SNAPLV >> $LOGFILE
+write_to_log "Backup of $WORKVG/$SNAPLV to $REMOTEHOST::$REMOTEDIR finished succesfully"
+  		write_to_log "====== Backup finished ======"
