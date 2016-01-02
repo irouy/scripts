@@ -31,7 +31,7 @@ write_to_log "====== Starting Backup ======"
                 echo "$SNAPLV already exists! Aborting" 1>&2
                 exit 1
         else
-                lvcreate -L $SNAPSIZE -s /dev/$WORKVG/$SOURCELV -n $SNAPLV >> $LOGFILE
+                /sbin/lvcreate -L $SNAPSIZE -s /dev/$WORKVG/$SOURCELV -n $SNAPLV >> $LOGFILE
         fi
 
 # Make sure $DIRECTORY exists, if not then create directory!
@@ -39,7 +39,7 @@ write_to_log "====== Starting Backup ======"
         then
                 echo "Directory $SNAPLV exists." >> $LOGFILE
         else
-                mkdir /mnt/$SNAPLV
+                /usr/bin/mkdir /mnt/$SNAPLV
         fi
 
 # check whether mount point is in use
@@ -53,17 +53,17 @@ write_to_log "====== Starting Backup ======"
 /usr/bin/mount --verbose --read-only $MOUNTOPTS /dev/$WORKVG/$SNAPLV /mnt/$SNAPLV >> $LOGFILE 
 	if [ $? -ne 0 ]; then
 		rmdir /mnt/$SNAPLV
-		lvremove -f /dev/$WORKVG/$SNAPLV >> $LOGFILE
+		/sbin/lvremove -f /dev/$WORKVG/$SNAPLV >> $LOGFILE
   		write_to_log "[X] Error: Could not mount /dev/$WORKVG/$SNAPLV to /mnt/$SNAPLV"
   		write_to_log "====== Backup failed ======"
   		exit 1
 	fi
 write_to_log "Starting rsync of $WORKVG/$SNAPVOL to $REMOTEHOST::$REMOTEDIR"
-rsync --archive --delete-before /mnt/$SNAPLV/ $REMOTEHOST::$REMOTEDIR 
+/usr/bin/rsync --archive --delete-before /mnt/$SNAPLV/ $REMOTEHOST::$REMOTEDIR 
 write_to_log "Unmounting /mnt/$SNAPLV"
-umount /mnt/$SNAPLV
+/usr/bin/umount /mnt/$SNAPLV
 write_to_log "Removing temp dir /mnt/$SNAPLV"
-rmdir /mnt/$SNAPLV
-lvremove -f /dev/$WORKVG/$SNAPLV >> $LOGFILE
+/usr/bin/rmdir /mnt/$SNAPLV
+/sbin/lvremove -f /dev/$WORKVG/$SNAPLV >> $LOGFILE
 write_to_log "Backup of $WORKVG/$SNAPLV to $REMOTEHOST::$REMOTEDIR finished succesfully"
   		write_to_log "====== Backup finished ======"
