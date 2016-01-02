@@ -1,4 +1,4 @@
-#!/bin/sh +x
+#!/bin/bash 
 
 WORKVG="VG_VMS01_SYS"
 SOURCELV="LV_ROOT"
@@ -16,18 +16,18 @@ LOGFILE="/var/log/$WORKVG-$SOURCELV-backup.log"
         fi
 
 # write first parameter $1 to logfile
-function write_to_log 
-{
+	function write_to_log 
+		{
   # get current date and time
-  bkp_date=$(date +%Y-%m-%d@%H:%M:%S)
-  echo -e "$bkp_date : $1" >> $LOGFILE
-}
+  		bkp_date=$(date +%Y-%m-%d@%H:%M:%S)
+  		echo -e "$bkp_date : $1" >> $LOGFILE
+	}
 
 # Append log entry
-write_to_log "====== Starting Backup ======"
+	write_to_log "====== Starting Backup ======"
 
 # Check if SNAPLV exists
-        if [[ $(lvs | grep $SNAPLV) ]]; then
+        if [[ $(lvs | grep -q $SNAPLV) ]]; then
                 echo "$SNAPLV already exists! Aborting" 1>&2
                 exit 1
         else
@@ -43,27 +43,31 @@ write_to_log "====== Starting Backup ======"
         fi
 
 # check whether mount point is in use
-	if [ ! -z "$(mount -l | grep $SNAPLV)" ]; then 
+	if (mount -l | grep -q $SNAPLV)
+	then 
   		write_to_log "[X] Error: Mount point already in use"
   		write_to_log "====== Backup failed ======"
   		exit 1
 	fi
 
 # Mount SNAPVOL
-/usr/bin/mount --verbose --read-only $MOUNTOPTS /dev/$WORKVG/$SNAPLV /mnt/$SNAPLV >> $LOGFILE 
-	if [ $? -ne 0 ]; then
+	if (/usr/bin/mount --read-only $MOUNTOPTS /dev/$WORKVG/$SNAPLV /mnt/$SNAPLV >> $LOGFILE) 
+	then
+		echo "Mounted /dev/$WORKVG/$SNAPLV on /mnt/$SNAPLV" >> $LOGFILE 
+	else	
 		rmdir /mnt/$SNAPLV
 		/sbin/lvremove -f /dev/$WORKVG/$SNAPLV >> $LOGFILE
   		write_to_log "[X] Error: Could not mount /dev/$WORKVG/$SNAPLV to /mnt/$SNAPLV"
   		write_to_log "====== Backup failed ======"
   		exit 1
 	fi
-write_to_log "Starting rsync of $WORKVG/$SNAPVOL to $REMOTEHOST::$REMOTEDIR"
+
+		write_to_log "Starting rsync of $WORKVG/$SNAPVOL to $REMOTEHOST::$REMOTEDIR"
 /usr/bin/rsync --archive --delete-before /mnt/$SNAPLV/ $REMOTEHOST::$REMOTEDIR 
-write_to_log "Unmounting /mnt/$SNAPLV"
+		write_to_log "Unmounting /mnt/$SNAPLV"
 /usr/bin/umount /mnt/$SNAPLV
-write_to_log "Removing temp dir /mnt/$SNAPLV"
+		write_to_log "Removing temp dir /mnt/$SNAPLV"
 /usr/bin/rmdir /mnt/$SNAPLV
 /sbin/lvremove -f /dev/$WORKVG/$SNAPLV >> $LOGFILE
-write_to_log "Backup of $WORKVG/$SNAPLV to $REMOTEHOST::$REMOTEDIR finished succesfully"
+		write_to_log "Backup of $WORKVG/$SNAPLV to $REMOTEHOST::$REMOTEDIR finished succesfully"
   		write_to_log "====== Backup finished ======"
