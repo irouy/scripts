@@ -1,1 +1,0 @@
-sudo zypper in tshark whois ipcalc nmap wget htop  
