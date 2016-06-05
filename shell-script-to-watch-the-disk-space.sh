@@ -1,5 +1,6 @@
 #!/bin/sh
 # With thanks to http://www.cyberciti.biz/tips/shell-script-to-watch-the-disk-space.html
+# 0 * * * * /root/diskcheck.sh > /dev/null 2>&1
 
 df -H | grep -vE '^Filesystem|tmpfs|cdrom' | awk '{ print $5 " " $1 }' | while read output;
 do
