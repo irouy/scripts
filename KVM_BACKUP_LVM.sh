@@ -12,7 +12,7 @@ display_usage() {
         echo "if FS == XFS then MOUNTOPTS should read -onouuid,ro"
         	/sbin/vgs    
         	/sbin/lvs
-        echo -e "\nUsage:\n$0 WORKVG SOURCELV BACKUPDIR MOUNTOPTS SNAPSIZE \n" 
+        echo -e "\nUsage:\n$0 VG_HOSTNAME LV_LIBVIRT /var/backup/HOSTNAME/ -onouuid,ro 16G \n" 
         } 
 
 # if less than two arguments supplied, display usage 
