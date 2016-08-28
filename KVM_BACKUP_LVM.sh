@@ -10,8 +10,6 @@ SNAPSIZE="$5"
 display_usage() { 
         echo "You need to input WORKVG SOURCELV BACKUPDIR MOUNTOPTS SNAPSIZE" 
         echo "if FS == XFS then MOUNTOPTS should read -onouuid,ro"
-        	/sbin/vgs    
-        	/sbin/lvs
         echo -e "\nUsage:\n$0 VG_HOSTNAME LV_LIBVIRT /var/backup/HOSTNAME/ -onouuid,ro 16G \n" 
         } 
 
