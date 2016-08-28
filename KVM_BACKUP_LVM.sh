@@ -1,6 +1,4 @@
 #!/bin/bash
-# Created by Youri Matthys 20160828
-# Please share any feedback to yourimatthys [at] gmail [dot] com
 
 WORKVG="$1"
 SOURCELV="$2"
