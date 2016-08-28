@@ -41,7 +41,7 @@ display_usage() {
                 echo "====== Starting Backup ======"
 
 # Check if SNAPLV exists
-        if [[ $(lvs | grep -q $SNAPLV) ]]; then
+        if [[ $(/sbin/lvs | grep -q $SNAPLV) ]]; then
                 echo "====== Backup failed: $SNAPLV already exists! Aborting ======"
                 exit 1
         else
