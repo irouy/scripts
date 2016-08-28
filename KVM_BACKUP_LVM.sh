@@ -80,8 +80,8 @@ display_usage() {
         fi
 
 # Do the Backup
-                echo "Backing up Disk Images on $WORKVG/$SNAPLV/images to $BACKUPDIR"
-                        /usr/bin/lzop --force /mnt/$SNAPLV/images/*  --path=$BACKUPDIR
+                echo "Backing up Disk Images $WORKVG/$SNAPLV/* to $BACKUPDIR"
+                        /usr/bin/lzop --force /mnt/$SNAPLV/*  --path=$BACKUPDIR
                 echo "Dumping config files from /etc/libvirt/qemu"
                         /bin/cp /etc/libvirt/qemu/*.xml $BACKUPDIR
 # CLeaning up                
