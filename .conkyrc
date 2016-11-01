@@ -60,19 +60,17 @@ conky.config = {
 }
 
 conky.text = [[
-${color red}$nodename$color
+${color red}$nodename$color  Uptime: ${color green}$uptime$color
 $sysname-${color green}$kernel$color-$machine 
+${color green}CPU Frequency:$color $freq MHz
 $hr
-${color green}Uptime:$color $uptime
-${color green}Frequency (in MHz):$color $freq
 ${color green}CPU Usage:$color $cpu% 
 ${cpubar 10}
 ${color green}RAM Usage:$color $mem/$memmax - $memperc% 
 ${membar 10}
 ${color green}Swap Usage:$color $swap/$swapmax - $swapperc% 
 ${swapbar 10}
-${color green}Networking:
-Up:$color ${upspeed eth0} ${color green} - Down:$color ${downspeed eth0}
+${color green}Networking: Up:$color ${upspeed eth0} ${color green} - Down:$color ${downspeed eth0}
 $hr
 ${color green}/ $color${fs_used /}/${fs_size /} 
 ${fs_bar 10 /}
@@ -82,7 +80,7 @@ ${color green}/var/backup $color${fs_used /var/backup}/${fs_size /var/backup}
 ${fs_bar 10 /var/backup}
 $hr
 ${color green}Processes:$color $processes  ${color green}Running:$color $running_processes
-${color red}Name             PID     CPU%  MEM% $color
+${color purple}Name             PID     CPU%  MEM% $color
 ${top name 1} ${top pid 1} ${top cpu 1} ${top mem 1}
 ${top name 2} ${top pid 2} ${top cpu 2} ${top mem 2}
 ${top name 3} ${top pid 3} ${top cpu 3} ${top mem 3}
