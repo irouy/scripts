@@ -26,7 +26,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ]]
 
 conky.config = {
-    alignment = 'top_left',
+    alignment = 'bottom_left',
     background = false,
     border_width = 1,
     cpu_avg_samples = 2,
@@ -39,8 +39,8 @@ conky.config = {
     draw_shades = false,
     use_xft = true,
     font = 'DejaVu Sans Mono:size=10',
-    gap_x = 5,
-    gap_y = 100,
+    gap_x = 8,
+    gap_y = 32,
     minimum_height = 5,
 	minimum_width = 5,
     net_avg_samples = 2,
