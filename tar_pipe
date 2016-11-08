@@ -1,1 +1,0 @@
-(cd backup && tar c .) | (cd backupArchives && tar xf -)
