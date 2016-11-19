@@ -1,0 +1,4 @@
+alias top="htop"
+alias du="ncdu"
+alias df="pydf"
+date_ping () { ping $1 | while read pong; do echo $(date +%T) — $pong;done }
