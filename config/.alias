@@ -12,4 +12,4 @@ alias tar_compress="tar cvpf"
 alias tar_list="tar tvpf"
 alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
 # Functions
-date_ping () { ping $1 | while read pong; do echo $(date +%T) — $pong;done }
+date_ping () { ping $1 | while read pong; do echo $(date +%c) — $pong;done }
