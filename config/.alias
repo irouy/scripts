@@ -1,7 +1,14 @@
+# App replacements
 alias top="htop"
 alias du="ncdu"
 alias df="pydf"
+alias vi="vim"
+# Command improvements
 alias mkdir="mkdir -pv"
 alias histg="history | grep"
 alias lsh="ls -lah"
+alias tar_extract="tar xvpf"
+alias tar_compress="tar cvpf"
+alias tar_list="tar tvpf"
+# Functions
 date_ping () { ping $1 | while read pong; do echo $(date +%T) — $pong;done }
