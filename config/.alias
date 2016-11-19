@@ -1,4 +1,7 @@
 alias top="htop"
 alias du="ncdu"
 alias df="pydf"
+alias mkdir="mkdir -pv"
+alias histg="history | grep"
+alias lsh="ls -lah"
 date_ping () { ping $1 | while read pong; do echo $(date +%T) — $pong;done }
