@@ -51,12 +51,16 @@ conky.config = {
     own_window = true,
     own_window_class = 'Conky',
     own_window_type = 'desktop',
+	own_window_transparent = true,
+	own_window_argb_visual = true,
+	own_window_argb_value = 255,
     stippled_borders = 0,
-    update_interval = 5.0,
+    update_interval = 2.5,
     uppercase = false,
     use_spacer = 'none',
     show_graph_scale = false,
-    show_graph_range = false
+    show_graph_range = false,
+	double_buffer = true
 }
 
 conky.text = [[
