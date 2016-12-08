@@ -11,6 +11,7 @@ alias tar_extract="tar xvpf"
 alias tar_compress="tar cvpf"
 alias tar_list="tar tvpf"
 alias psgrep="ps aux | grep -v grep | grep -i -e VSZ -e"
+alias stubru="mplayer http://mp3.streampower.be/stubru-high"
 # Functions
 ping () { /usr/bin/ping $1 | while read pong; do echo $(date +%c) — $pong;done }
 mkdircd () {
