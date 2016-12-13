@@ -1,10 +1,10 @@
  <?php echo '<p>optie43 converter mash-up 20161212 </p>'; ?> 
  <?php echo '<p>form input example code</p>'; ?>
-<form action="option43_converter_hexinput.php" method="post">
+<form action="" method="post">
 HEX: <input type="text" name="HEX_INPUT"><br>
 <input type="submit">
 </form>
-<form action="option43_converter_asciiinput.php" method="post">
+<form action="" method="post">
 ASCII: <input type="text" name="ASCII_INPUT"><br>
 <input type="submit">
 </form>
