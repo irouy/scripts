@@ -1,6 +1,6 @@
 #!/bin/sh
-# With thanks to http://www.cyberciti.biz/tips/shell-script-to-watch-the-disk-space.html
-# 0 * * * * /root/diskcheck.sh > /dev/null 2>&1
+# +1 2 http://www.cyberciti.biz/tips/shell-script-to-watch-the-disk-space.html
+# 0 * * * * /opt/git/miruoy/scripts/diskcheck.sh email@example.com >/dev/null 2&1
 
 df -H | grep -vE '^Filesystem|tmpfs|cdrom' | awk '{ print $5 " " $1 }' | while read output;
 do
@@ -9,6 +9,6 @@ do
   partition=$(echo $output | awk '{ print $2 }' )
   if [ $usep -ge 90 ]; then
     echo "Running out of space \"$partition ($usep%)\" on $(hostname) as on $(date)" |
-     mail -s "Alert: Almost out of disk space $usep%" email@example.com
+     mail -s "Alert: Almost out of disk space $usep%" $1
   fi
 done
