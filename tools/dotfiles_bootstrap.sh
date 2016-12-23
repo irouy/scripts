@@ -23,7 +23,7 @@ printf "\nInstall Conky for GNOME3, XFCE or none? [g/x/n]"
 fi
 
 printf "\nDotfiles succesfully deployed into $HOME"
-printf "\nHave a lot of fun!"
+printf "\nHave a lot of fun!\n"
 
 
 exit
