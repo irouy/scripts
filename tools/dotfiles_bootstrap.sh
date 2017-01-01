@@ -1,5 +1,5 @@
 #!/bin/bash
-CONFDIR="../config"
+CONFDIR="../dotfiles"
 
 # Link dotfiles into home folder
 printf "Soft-linking dotfiles in $PWD/$CONFDIR to $HOME" 
