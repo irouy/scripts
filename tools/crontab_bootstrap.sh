@@ -4,7 +4,7 @@ TMPFILE="/tmp/bootstrap_$USER.cronout"
 #Check if we are in the right directory.
 if [ -e $PWD/crontab_bootstrap.sh ]; then printf "\nValidated directory, continuing routine."; 
 	else printf "\nYou must run this script from its directory!"
-		printf "\nAborting!"
+		printf "\nAborting!\n"
 		exit
 fi
 
