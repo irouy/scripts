@@ -8,7 +8,7 @@ if [ -e $PWD/dotfiles_bootstrap.sh ]; then printf "\nValidated directory, contin
 		exit
 fi
 
-printf "\nClean existing dotfiles in $PWD? [y/N]"
+printf "\nClean existing dotfiles in $HOME? [y/N]"
 	read -n 1 CONTINUE
 		if [ $CONTINUE == "y" ]; then
     printf "\n"
