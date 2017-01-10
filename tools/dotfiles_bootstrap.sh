@@ -17,6 +17,7 @@ printf "\nClean existing dotfiles in $HOME? [y/N]"
     rm -i $HOME/.screenrc
     rm -i $HOME/.vimrc
     rm -i $HOME/.guake.autostart
+    rm -i $HOME/.config/autostart/conky.desktop
 fi
 
 # Link dotfiles into home folder
@@ -27,6 +28,7 @@ ln -s $PWD/$CONFDIR/.alias $HOME/.alias && sh $HOME/.bashrc && printf "\nLinked 
 ln -s $PWD/$CONFDIR/.screenrc $HOME/.screenrc && printf "\nLinked .screenrc"
 ln -s $PWD/$CONFDIR/.vimrc $HOME/.vimrc && printf "\nLinked .vimrc"
 ln -s $PWD/$CONFDIR/.guake.autostart $HOME/.guake.autostart && chmod +x $HOME/.guake.autostart && printf "\n:Linked .guake.autostart"
+ln -s $PWD/../config/conky.desktop $HOME/.config/autostart/ && printf "\nLinked conky for autostart"
 
 printf "\nInstall Conky for GNOME3, XFCE or none? [g/x/N]"
 	read -n 1 CONKYDE
