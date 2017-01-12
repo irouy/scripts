@@ -37,12 +37,12 @@ printf "\nInstall Conky for GNOME3, XFCE or none? [g/x/N]"
 	if [ $CONKYDE == "g" ]; then
 		printf "\nInstalling GNOME3 version"
 		ln -s $PWD/$CONFDIR/.conkyrc_gnome3 $HOME/.conkyrc
-		elif [ $CONKYDE == "x" ]; then
-			printf "\nInstalling XFCE version"
-			ln -s $PWD/$CONFDIR/.conkyrc_xfce3 $HOME/.conkyrc
+	elif [ $CONKYDE == "x" ]; then
+		printf "\nInstalling XFCE version"
+		ln -s $PWD/$CONFDIR/.conkyrc_xfce3 $HOME/.conkyrc
 	else 
 		printf "\nSkipping .conkyrc"
-fi
+	fi
 
 printf "\nDotfiles succesfully deployed into $HOME"
 printf "\nHave a lot of fun!\n"
