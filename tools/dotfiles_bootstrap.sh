@@ -17,6 +17,7 @@ printf "\nClean existing dotfiles in $HOME? [y/N]"
     rm -i $HOME/.screenrc
     rm -i $HOME/.vimrc
     rm -i $HOME/.guake.autostart
+    rm -i $HOME/.conkyrc
     rm -i $HOME/.config/autostart/conky.desktop
 fi
 
