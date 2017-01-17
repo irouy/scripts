@@ -39,7 +39,7 @@ printf "\nInstall Conky for GNOME3, XFCE or none? [g/x/N]"
 		ln -s $PWD/$CONFDIR/.conkyrc_gnome3 $HOME/.conkyrc
 	elif [ $CONKYDE == "x" ]; then
 		printf "\nInstalling XFCE version"
-		ln -s $PWD/$CONFDIR/.conkyrc_xfce3 $HOME/.conkyrc
+		ln -s $PWD/$CONFDIR/.conkyrc_xfce $HOME/.conkyrc
 	else 
 		printf "\nSkipping .conkyrc"
 	fi
