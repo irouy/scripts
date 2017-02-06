@@ -25,6 +25,7 @@ printf "\nPlease input alerting email address [email@example.com]\n" && read ALE
 crontab -l > $TMPFILE && printf "\nLoaded current crontab into $TMPFILE\n" && printf "\nOriginal Crontab\n" && cat $TMPFILE 
 
 	echo "0 * * * * $PWD/diskcheck.sh $ALERTMAILADDR >/dev/null 2>&1" >> $TMPFILE && chmod +x $PWD/diskcheck.sh
+	echo "0 * * * * $PWD/loadmon.sh $ALERTMAILADDR >/dev/null 2>&1" >> $TMPFILE && chmod +x $PWD/loadmon.sh
 	echo "10 0 * * * /bin/tar cvpf $BACKDIR/$HOSTNAME-$USER-daily.tar $HOME | mail -s '$HOSTNAME Daily $USER $HOME TAR' $ALERTMAILADDR" >> $TMPFILE
 	echo "20 0 * * * /usr/bin/crontab -l > $BACKDIR/$HOSTNAME-crontab-$USER-daily.crontab | mail -s '$HOSTNAME Backup crontab $USER daily' $ALERTMAILADDR" >> $TMPFILE
 	echo "30 0 * * * /bin/tar cvpf $BACKDIR/$HOSTNAME-etc-daily.tar /etc |mail -s '$HOSTNAME Backup etc' $ALERTMAILADDR" >> $TMPFILE
