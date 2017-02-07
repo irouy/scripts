@@ -23,7 +23,7 @@ printf "\nPlease input alerting email address [email@example.com]\n" && read ALE
 	
 # Setup CRON
 crontab -l > $TMPFILE && printf "\nLoaded current crontab into $TMPFILE\n" && printf "\nOriginal Crontab\n" && cat $TMPFILE 
-
+	echo "#DOTFILES.SH $(date)" >> $TMPFILE
 	echo "0 * * * * $PWD/diskcheck.sh $ALERTMAILADDR >/dev/null 2>&1" >> $TMPFILE && chmod +x $PWD/diskcheck.sh
 	echo "0 * * * * $PWD/loadmon.sh $ALERTMAILADDR >/dev/null 2>&1" >> $TMPFILE && chmod +x $PWD/loadmon.sh
 	echo "10 0 * * * /bin/tar cvpf $BACKDIR/$HOSTNAME-$USER-daily.tar $HOME | mail -s '$HOSTNAME Daily $USER $HOME TAR' $ALERTMAILADDR" >> $TMPFILE
