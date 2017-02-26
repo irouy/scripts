@@ -80,6 +80,8 @@ ${color green}/ $color${fs_used /}/${fs_size /}
 ${fs_bar 10 /}
 ${color green}/var/lib/libvirt/images $color${fs_used /var/lib/libvirt/images}/${fs_size /var/lib/libvirt/images} 
 ${fs_bar 10 /var/lib/libvirt/images}
+${color green}/var/backup $color${fs_used /var/backup}/${fs_size /var/backup} 
+${fs_bar 10 /var/backup}
 ${color green}/home $color${fs_used /home}/${fs_size /home} 
 ${fs_bar 10 /home}
 $hr
