@@ -1,9 +1,8 @@
-#conky.desktop
-# Place in ~/.config/autostart/
 [Desktop Entry]
-Type=Application
-Name=Conky
 Comment=Start conky script
 Exec=conky -d
+Hidden=false
+Name=Conky
 OnlyShowIn=GNOME;
+Type=Application
 X-GNOME-Autostart-Phase=Application
