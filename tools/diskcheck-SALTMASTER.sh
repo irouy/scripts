@@ -2,7 +2,7 @@
 # +1 2 http://www.cyberciti.biz/tips/shell-script-to-watch-the-disk-space.html
 # 0 * * * * diskcheck.sh email@example.com >/dev/null 2&1
 
-salt "*" cmd.run "df -H" | grep -vE '^Filesystem|tmpfs|cdrom' | awk '{ print $5 " " $1 }' | while read output;
+salt "*" cmd.run "df -H" | grep '%' | grep -vE '^Filesystem|tmpfs|cdrom' | awk '{ print $5 " " $1 }' | while read output;
   do
     echo $output
     usep=$(echo $output | awk '{ print $1}' | cut -d'%' -f1  )
