@@ -12,13 +12,13 @@ printf "\nClean existing dotfiles in $HOME? [y/N]"
 	read -n 1 CONTINUE
 		if [ $CONTINUE == "y" ]; then
     printf "\n"
-    rm -i $HOME/.bashrc
-    rm -i $HOME/.alias
-    rm -i $HOME/.screenrc
-    rm -i $HOME/.vimrc
-    rm -i $HOME/.guake.autostart
-    rm -i $HOME/.conkyrc
-    rm -i $HOME/.config/autostart/conky.desktop
+    rm $HOME/.bashrc
+    rm $HOME/.alias
+    rm $HOME/.screenrc
+    rm $HOME/.vimrc
+    rm $HOME/.guake.autostart
+    rm $HOME/.conkyrc
+    rm $HOME/.config/autostart/conky.desktop
 fi
 
 # Link dotfiles into home folder
@@ -33,17 +33,8 @@ mkdir $HOME/.config/autostart/
 ln -s $PWD/../config/conky.desktop $HOME/.config/autostart/ && printf "\nLinked conky for autostart"
 ln -s /usr/share/applications/guake.desktop $HOME/.config/autostart/ && printf "\nLinked guake for autostart"
 
-printf "\nInstall Conky for GNOME3, XFCE or none? [g/x/N]"
-	read -n 1 CONKYDE
-	if [ $CONKYDE == "g" ]; then
-		printf "\nInstalling GNOME3 version"
-		ln -s $PWD/$CONFDIR/.conkyrc_gnome3 $HOME/.conkyrc
-	elif [ $CONKYDE == "x" ]; then
-		printf "\nInstalling XFCE version"
-		ln -s $PWD/$CONFDIR/.conkyrc_xfce $HOME/.conkyrc
-	else 
-		printf "\nSkipping .conkyrc"
-	fi
+printf "\nInstalling GNOME3 version"
+ln -s $PWD/$CONFDIR/.conkyrc_gnome3 $HOME/.conkyrc
 
 printf "\nDotfiles succesfully deployed into $HOME"
 printf "\nHave a lot of fun!\n"
