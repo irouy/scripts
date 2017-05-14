@@ -24,6 +24,7 @@ fi
 # Link dotfiles into home folder
 printf "Soft-linking dotfiles in $PWD/$CONFDIR to $HOME\n" 
 
+ln -s $PWD/../config/ssh_config $HOME/.ssh/config && "n\Linked ssh_config"
 ln -s $PWD/$CONFDIR/.bashrc $HOME/.bashrc && printf "\nLinked .bashrc"
 ln -s $PWD/$CONFDIR/.alias $HOME/.alias && sh $HOME/.bashrc && printf "\nLinked .alias and Sourced $HOME/.bashrc"
 ln -s $PWD/$CONFDIR/.screenrc $HOME/.screenrc && printf "\nLinked .screenrc"
