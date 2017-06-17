@@ -34,9 +34,11 @@ mkdir $HOME/.config/autostart/
 ln -s $PWD/../config/conky.desktop $HOME/.config/autostart/ && printf "\nLinked conky for autostart"
 ln -s /usr/share/applications/guake.desktop $HOME/.config/autostart/ && printf "\nLinked guake for autostart"
 $HOME/.bashrc && printf "\Sourced $HOME/.bashrc"
+cd $HOME
 
 printf "\nInstalling GNOME3 version"
 ln -s $PWD/$CONFDIR/.conkyrc_gnome3 $HOME/.conkyrc
+
 
 printf "\nDotfiles succesfully deployed into $HOME"
 printf "\nHave a lot of fun!\n"
