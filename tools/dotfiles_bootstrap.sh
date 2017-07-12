@@ -2,7 +2,8 @@
 CONFDIR="../dotfiles"
 
 #Check if we are in the right directory.
-if [ -e $PWD/dotfiles_bootstrap.sh ]; then printf "\nValidated directory, continuing routine."; 
+if [ -e $PWD/dotfiles_bootstrap.sh ]
+	then printf "\nValidated directory, continuing routine."; 
 	else printf "\nYou must run this script from its directory!"
 		printf "\nAborting!\n"
 		exit
@@ -33,15 +34,12 @@ ln -s $PWD/$CONFDIR/.guake.autostart $HOME/.guake.autostart && chmod +x $HOME/.g
 mkdir $HOME/.config/autostart/ 
 ln -s $PWD/../config/conky.desktop $HOME/.config/autostart/ && printf "\nLinked conky for autostart"
 ln -s /usr/share/applications/guake.desktop $HOME/.config/autostart/ && printf "\nLinked guake for autostart"
-$HOME/.bashrc && printf "\Sourced $HOME/.bashrc"
+ln -s $PWD/$CONFDIR/.conkyrc_gnome3 $HOME/.conkyrc && printf "\nInstalling Conky GNOME3 version"
+
 cd $HOME
-
-printf "\nInstalling GNOME3 version"
-ln -s $PWD/$CONFDIR/.conkyrc_gnome3 $HOME/.conkyrc
-
+sh $HOME/.bashrc && printf "\Sourced $HOME/.bashrc"
 
 printf "\nDotfiles succesfully deployed into $HOME"
 printf "\nHave a lot of fun!\n"
-
 
 exit
