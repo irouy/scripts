@@ -18,7 +18,7 @@ alias ssh="ssh -Xv"
 alias psychedelic="mplayer http://88.191.145.93:8010"
 alias stubru="mplayer http://mp3.streampower.be/stubru-high"
 # Functions
-ping () { ping $1 | while read pong; do echo $(date +%c) — $pong;done }
+ping_date () { ping $1 | while read pong; do echo $(date +%c) — $pong;done }
 mkdircd () {
     mkdir -p $1
     cd $1
