@@ -16,4 +16,3 @@ alias psgrep="ps aux | grep -v grep | grep -i -e VSZ -e"
 alias ssh="ssh -Xv"
 # Functions
 ping_date () { ping $1 | while read pong; do echo $(date +%c) — $pong;done }
-mkdircdir () { mkdir -p $1; cd $1 }
