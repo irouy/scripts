@@ -30,7 +30,7 @@ conky.config = {
     background = true,
     border_width = 1,
     cpu_avg_samples = 2,
-	default_color = 'white',
+    default_color = 'white',
     default_outline_color = 'white',
     default_shade_color = 'white',
     draw_borders = false,
@@ -42,34 +42,37 @@ conky.config = {
     gap_x = 10,
     gap_y = 10,
     minimum_height = 5,
-	minimum_width = 5,
+    minimum_width = 5,
     net_avg_samples = 2,
     no_buffers = yes,
     out_to_console = false,
     out_to_stderr = false,
     extra_newline = false,
     own_window = true,
+    own_window_colour = '31363b',
     own_window_class = 'conky-semi',
     own_window_type = 'normal',
-	own_window_transparent = yes,
-	own_window_hints = undecorated,below,skip_taskbar,skip_pager,
-	own_window_argb_visual = yes,
-	own_window_transparent = false,
-	own_window_argb_visual = true,
-	own_window_argb_value = 255,
+    own_window_transparent = yes,
+    own_window_hints = undecorated,below,skip_taskbar,skip_pager,
+    own_window_argb_visual = yes,
+    own_window_transparent = false,
+    own_window_argb_visual = true,
+    own_window_argb_value = 255,
     stippled_borders = 0,
     update_interval = 2.5,
     uppercase = false,
     use_spacer = 'none',
     show_graph_scale = false,
     show_graph_range = false,
-	double_buffer = true
+    double_buffer = true
 }
 
 conky.text = [[
-${color red}$nodename$color  Uptime: ${color green}$uptime$color
+${color red}$nodename$color 
+
 $sysname-${color green}$kernel$color-$machine 
 ${color green}CPU Frequency:$color $freq MHz
+Utime: ${color green}$uptime$color
 $hr
 ${color green}CPU Usage:$color $cpu% 
 ${cpubar 10}
