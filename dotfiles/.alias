@@ -15,5 +15,6 @@ alias tar_list="tar tvpf"
 alias psgrep="ps aux | grep -v grep | grep -i -e VSZ -e"
 alias ssh="ssh -Xv"
 alias ping="ping -c 4"
+dd_status="sudo kill -USR1 $(pgrep ^dd)"
 # Functions
 ping_date () { ping $1 | while read pong; do echo $(date +%c) — $pong;done }
