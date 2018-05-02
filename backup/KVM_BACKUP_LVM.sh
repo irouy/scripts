@@ -80,6 +80,7 @@ display_usage() {
 # Do the Backup
                 echo "Backing up Disk Images $WORKVG/$SNAPLV/* to $BACKUPDIR"
                         /usr/bin/ionice -c 3 /usr/bin/lzop --force /mnt/$SNAPLV/*  --path=$BACKUPDIR
+                        /usr/bin/ionice -c 3 /usr/bin/lzop --force /mnt/$SNAPLV/brick01/*  --path=$BACKUPDIR
                 echo "Dumping config files from /etc/libvirt/qemu"
                         /bin/cp -a /etc/libvirt/qemu/*.xml $BACKUPDIR
 # CLeaning up                
