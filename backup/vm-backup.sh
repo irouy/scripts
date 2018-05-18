@@ -86,7 +86,7 @@ i=1
 for b in $LIST; do
     if [ $i -gt "$MAXBACKUPS" ]; then
         echo "Removing old backup "`basename $b`
-        rm -rf "$b"
+        rm -rf "$BACKUPDOMAIN/$b"
     fi
 
     i=$[$i+1]
