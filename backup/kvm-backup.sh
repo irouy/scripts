@@ -24,10 +24,10 @@ for DOMAIN in $DOMAINS; do
 	mkdir -p $BACKUPFOLDER
 
 	# Get the target disk
-	TARGETS=$(virsh domblklist $DOMAIN --details | grep disk | awk '{print $3}')
+	TARGETS=$(virsh domblklist $DOMAIN --details | grep disk | grep -v 'cdrom' | grep -v 'floppy' | awk '{print $3}')
 
 	# Get the image page
-	IMAGES=$(virsh domblklist $DOMAIN --details | grep disk | awk '{print $4}')
+	IMAGES=$(virsh domblklist $DOMAIN --details | grep disk | grep -v 'cdrom' | grep -v 'floppy' | awk '{print $4}')
 
 	# Create the snapshot/disk specification
 	DISKSPEC=""
