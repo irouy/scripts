@@ -82,7 +82,7 @@ ${color green}CPU$color $freq MHz ${color green}$color $cpu%${cpubar 10}
 ${color green}RAM$color $mem/$memmax $memperc%${membar 10}
 ${cpugraph 20,130 07CC0D FF0000 -t} P ${alignr}  M ${memgraph 20,130 07CC0D FF0000 -t}
 ${color green}SWAP$color $swap$swapmax $swapperc%${swapbar 10}
-${color green}WAN IP$color ${exec curl ipinfo.io/ip}
+#${color green}WAN IP$color ${exec curl ipinfo.io/ip}
 ${color green}eth0$color ${addrs eth0} 
 ${color green}DOWN $color${downspeed eth0}${color green}▼$color ${alignr} ${color green}UP $color${upspeed eth0}${color green}▲$color 
 ${downspeedgraph eth0 20,130 07CC0D FF0000 -t} ▼ ${alignr}  ▲ ${upspeedgraph eth0 20,130 07CC0D FF0000 -t}
