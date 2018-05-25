@@ -75,8 +75,8 @@ ${color green}Processes:$color $processes  ${color green}Running:$color $running
 
 $sysname-${color green}$kernel$color-$machine 
 UP ${color green}$uptime$color
-${color green}CPU TEMP${color} ${hwmon 3 temp 2}°C ${color green}GPU TEMP${color} ${hwmon 0 temp 1}°C
-${color green}FAN4${color} ${hwmon 3 fan 4} RPM ${color green}FAN5${color} ${hwmon 3 fan 5} RPM
+${color green}CPU TEMP${color} ${hwmon 2 temp 1}°C ${color green}GPU TEMP${color} ${hwmon 0 temp 1}°C
+${color green}FAN4${color} ${hwmon 2 fan 4} RPM ${color green}FAN5${color} ${hwmon 2 fan 5} RPM
 
 ${color green}CPU$color $freq MHz ${color green}$color $cpu%${cpubar 10}
 ${color green}RAM$color $mem/$memmax $memperc%${membar 10}
