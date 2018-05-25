@@ -92,6 +92,8 @@ ${color green}BACK $color${fs_used /var/backup}/${fs_size /var/backup} ${fs_bar 
 ${color green}HOME $color${fs_used /home}/${fs_size /home} ${fs_bar 10 /home}
 ${color green}Read ${color} ${diskio_read /dev/sda} ${alignr}${color green}Write: ${color}${diskio_write /dev/sda}	
 ${diskiograph_read /dev/sda 20,130 07CC0D FF0000 -t} R${alignr} W ${diskiograph_write /dev/sda 20,130 07CC0D FF0000 -t}
+${color green}Read ${color} ${diskio_read /dev/sdb} ${alignr}${color green}Write: ${color}${diskio_write /dev/sdb}	
+${diskiograph_read /dev/sdb 20,130 07CC0D FF0000 -t} R${alignr} W ${diskiograph_write /dev/sdb 20,130 07CC0D FF0000 -t}
 
 ${color purple}Name             PID     CPU%  MEM% $color
 ${top name 1} ${top pid 1} ${top cpu 1} ${top mem 1}
