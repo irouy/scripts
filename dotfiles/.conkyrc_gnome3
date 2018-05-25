@@ -83,9 +83,9 @@ ${color green}RAM$color $mem/$memmax $memperc%${membar 10}
 ${cpugraph 20,130 07CC0D FF0000 -t} P ${alignr}  M ${memgraph 20,130 07CC0D FF0000 -t}
 ${color green}SWAP$color $swap$swapmax $swapperc%${swapbar 10}
 ${color green}WAN IP$color ${exec curl ipinfo.io/ip}
-${color green}enp3s0$color ${addrs enp3s0} 
-${color green}DOWN $color${downspeed enp3s0}${color green}▼$color ${alignr} ${color green}UP $color${upspeed enp3s0}${color green}▲$color 
-${downspeedgraph enp3s0 20,130 07CC0D FF0000 -t} ▼ ${alignr}  ▲ ${upspeedgraph enp3s0 20,130 07CC0D FF0000 -t}
+${color green}eth0$color ${addrs eth0} 
+${color green}DOWN $color${downspeed eth0}${color green}▼$color ${alignr} ${color green}UP $color${upspeed eth0}${color green}▲$color 
+${downspeedgraph eth0 20,130 07CC0D FF0000 -t} ▼ ${alignr}  ▲ ${upspeedgraph eth0 20,130 07CC0D FF0000 -t}
 ${color green}ROOT $color${fs_used /}/${fs_size /} ${fs_bar 10 /}
 ${color green}VIRT $color${fs_used /var/lib/libvirt/images}/${fs_size /var/lib/libvirt/images} ${fs_bar 10 /var/lib/libvirt/images}
 ${color green}BACK $color${fs_used /var/backup}/${fs_size /var/backup} ${fs_bar 10 /var/backup}
