@@ -35,11 +35,16 @@ if [ ! -f /root/bin/vm-backup.sh ]; then
         fi
   
 # Setup CRON
+
 crontab -l > $TMPFILE
-    printf "\nLoaded current crontab into $TMPFILE\n" 
-    printf "\nOriginal Crontab\n" 
+    printf "\nLoaded current crontab into $TMPFILE\n"
+
+crontab -r
+    printf "\nRemoving current crontab\n"
+
 cat $TMPFILE
- 
+    printf "\nOriginal Crontab\n"
+
         echo "#DOTFILES.SH $(date)" >> $TMPFILE
         echo "#=================" >> $TMPFILE
         echo "# set VARIABLES  #" >> $TMPFILE
