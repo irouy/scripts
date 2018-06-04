@@ -10,10 +10,8 @@ if [ -e $PWD/crontab_bootstrap.sh ]; then
         exit
 fi
 
-printf "\nPlease input alerting email address [email@example.com]\n" 
-        read ALERTMAILADDR
-ls -lah /var && printf "\nPlease input Backup Path [/var/backup]\n" 
-        read BACKDIR
+        read -e -p "Please input alerting Mail: " -i "email@example.com" ALERTMAILADDR
+        read -e -p "Please input Backup Destination: " -i "/var/backup" BACKDIR
 
 printf "\nEmail address for alerting == $ALERTMAILADDR"
 printf "\nPath that will be used for storing backup files == $BACKDIR"
